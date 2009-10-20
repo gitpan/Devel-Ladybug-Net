@@ -1,0 +1,14 @@
+Changes
+INSTALL
+MANIFEST
+Makefile.PL
+README
+cpl1.0.txt
+lib/Devel/Ladybug/Domain.pm
+lib/Devel/Ladybug/EmailAddr.pm
+lib/Devel/Ladybug/IPv4Addr.pm
+lib/Devel/Ladybug/Net.pm
+lib/Devel/Ladybug/Subnet.pm
+lib/Devel/Ladybug/URI.pm
+t/Ladybug.t
+META.yml                                 Module meta-data (added by MakeMaker)

@@ -1,0 +1,10 @@
+.399_001
+  - Renamed distro to Devel::Ladybug::Net
+
+2009-10-01: .317
+  - Version sync with OP 0.317; still works
+  - Doc fixes
+
+2009-09-09: .314
+  - Split aux network datatypes from OP into their own distro
+  - Added OP::Subnet assertable object class
