@@ -11,7 +11,7 @@
 
 package Devel::Ladybug::Net;
 
-our $VERSION = '0.399_001';
+our $VERSION = '0.399_002';
 
 use strict;
 use warnings;
@@ -33,7 +33,7 @@ Devel::Ladybug::Net - Network datatypes for L<Devel::Ladybug>
 
 =head1 VERSION
 
-This documentation is for version B<0.399_001> of Devel::Ladybug::Net.
+This documentation is for version B<0.399_002> of Devel::Ladybug::Net.
 
 =head1 SYNOPSIS
 

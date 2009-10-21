@@ -1,5 +1,6 @@
-.399_001
-  - Renamed distro to Devel::Ladybug::Net
+.399_xxx
+  - Renamed distro from OP::Net to Devel::Ladybug::Net
+  - Add File::Tempdir as dependency for tests
 
 2009-10-01: .317
   - Version sync with OP 0.317; still works

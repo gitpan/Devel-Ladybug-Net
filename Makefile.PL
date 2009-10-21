@@ -8,6 +8,8 @@ my $prereqs = {
       Data::Validate::URI => 0.05,
            Email::Address => 1.889,
              Net::Subnets => 0.21,
+            File::Tempdir => 0.02,
+
 };
 
 WriteMakefile(
