@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Devel-Ladybug-Net
-version:             0.399_002
+version:             0.399_003
 abstract:            ~
 license:             open_source
 author:              
@@ -12,7 +12,7 @@ requires:
     Data::Validate::Email:         0.04
     Data::Validate::IP:            0.08
     Data::Validate::URI:           0.05
-    Devel::Ladybug:                0.399001
+    Devel::Ladybug:                0.399003
     Email::Address:                1.889
     File::Tempdir:                 0.02
     Net::Subnets:                  0.21
