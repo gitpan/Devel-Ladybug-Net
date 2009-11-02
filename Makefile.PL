@@ -1,7 +1,7 @@
 use ExtUtils::MakeMaker;
 
 my $prereqs = {
-           Devel::Ladybug => 0.399_003,
+           Devel::Ladybug => 0.400,
    Data::Validate::Domain => 0.09,
     Data::Validate::Email => 0.04,
        Data::Validate::IP => 0.08,

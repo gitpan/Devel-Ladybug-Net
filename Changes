@@ -1,3 +1,6 @@
+.400
+  - Hopefully ironed out dependencies in Makefile
+
 .399_xxx
   - Renamed distro from OP::Net to Devel::Ladybug::Net
   - Add File::Tempdir as dependency for tests
