@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Devel-Ladybug-Net
-version:             0.400
+version:             0.401
 abstract:            ~
 license:             open_source
 author:              
@@ -15,7 +15,6 @@ requires:
     Devel::Ladybug:                0.4
     Email::Address:                1.889
     File::Tempdir:                 0.02
-    Net::Subnets:                  0.21
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.3.html
     version: 1.3

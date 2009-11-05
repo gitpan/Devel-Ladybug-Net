@@ -1,3 +1,6 @@
+.401
+  - Remove Net::Subnets as dependency, since it seems to have evaporated
+
 .400
   - Hopefully ironed out dependencies in Makefile
 

@@ -15,8 +15,6 @@ use warnings;
 
 use Devel::Ladybug::Class qw| true false |;
 
-use Net::Subnets;
-
 use base qw| Devel::Ladybug::Str |;
 
 use constant AssertFailureMessage =>
@@ -71,18 +69,6 @@ sub new {
   return bless $self, $class;
 }
 
-sub list {
-  my $self = shift;
-
-  my $sn = Net::Subnets->new;
-
-  my $value = "$self";
-
-  my @range = $sn->range( \$value );
-
-  return Devel::Ladybug::Array->new( $sn->list(@range) );
-}
-
 true;
 __END__
 
@@ -102,7 +88,7 @@ Devel::Ladybug::Subnet - Overloaded Subnet object
 
 Simple class to represent subnets as strings.
 
-Extends L<Devel::Ladybug::Str>. Uses L<Net::Subnets> to expand ranges.
+Extends L<Devel::Ladybug::Str>.
 
 =head1 PUBLIC CLASS METHODS
 
@@ -128,26 +114,9 @@ received value.
 
 =back
 
-=head1 PUBLIC INSTANCE METHODS
-
-=over 4
-
-=item * $self->list
-
-Return a new L<Devel::Ladybug::Array> containing each IP in self's
-range.
-
-  $subnet->list->each( sub {
-    my $ip = shift;
-
-    print "Have IP address: $ip\n";
-  } );
-
-=back
-
 =head1 SEE ALSO
 
-L<Devel::Ladybug::Str>, L<Devel::Ladybug::Array>, L<Net::Subnets>
+L<Devel::Ladybug::Str>, L<Devel::Ladybug::Array>.
 
 This file is part of L<Devel::Ladybug::Net>.
 
