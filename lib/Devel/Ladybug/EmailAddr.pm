@@ -20,6 +20,23 @@ use Email::Address;
 
 use base qw| Email::Address Devel::Ladybug::Array |;
 
+use overload
+  fallback => true,
+  "eq" => sub {
+    my $A = shift;
+    my $B = shift;
+
+    if ( !UNIVERSAL::isa($A, "Devel::Ladybug::EmailAddr") ) {
+      $A = Devel::Ladybug::EmailAddr->new($A);
+    }
+    if ( !UNIVERSAL::isa($B, "Devel::Ladybug::EmailAddr") ) {
+      $B = Devel::Ladybug::EmailAddr->new($B);
+    }
+
+    return ( "$A" eq "$B" );
+  },
+  "==" => sub { shift eq shift };
+
 use constant AssertFailureMessage =>
   "Received value is not an email address";
 
@@ -31,11 +48,11 @@ sub assert {
     sub {
       my $self = shift;
 
-      if ( !ref($self) || !UNIVERSAL::isa( $self, "Email::Address" ) ) {
+      if ( !UNIVERSAL::isa( $self, "Devel::Ladybug::EmailAddr" ) ) {
         $self = $class->new($self);
       }
 
-      Data::Validate::Email::is_email( $self->address )
+      Data::Validate::Email::is_email( "$self" )
         || throw Devel::Ladybug::AssertFailed(AssertFailureMessage);
     },
     @rules
@@ -49,6 +66,10 @@ sub assert {
 sub new {
   my $class      = shift;
   my @components = @_;
+
+  if ( $components[0] && UNIVERSAL::isa($components[0],"ARRAY") ) {
+    @components = @{ $components[0] };
+  }
 
   my $self =
     ( @components > 1 )

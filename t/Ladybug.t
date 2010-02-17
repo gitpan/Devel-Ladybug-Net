@@ -60,12 +60,32 @@ do {
 SKIP: {
   skip( $nofs, 2 ) if $nofs;
 
-  my $class = "Devel::LadybugNet_YAMLTest::YAMLTest01";
+  my $class = "Devel::Ladybug::Net::YAMLTest";
   ok(
     testCreate(
       $class => {
         __useDbi       => false,
-        __useYaml      => true,
+        __useFlatfile  => true,
+        __useMemcached => 5,
+        %classPrototype
+      }
+    ),
+    "Class allocate"
+  );
+
+  kickClassTires($class);
+}
+
+#####
+SKIP: {
+  skip( $nofs, 2 ) if $nofs;
+
+  my $class = "Devel::Ladybug::Net::JSONTest";
+  ok(
+    testCreate(
+      $class => {
+        __useDbi       => false,
+        __useFlatfile  => 2,
         __useMemcached => 5,
         %classPrototype
       }
@@ -84,16 +104,40 @@ SKIP: {
   if ($nofs) {
     skip( $nofs, 2 );
   } elsif ( !$Devel::Ladybug::Runtime::Backends->{"SQLite"} ) {
-    my $reason = "DBD::SQLite is not installed";
+    my $reason = "DBD::SQLite is not supported on this system";
 
     skip( $reason, 2 );
   }
 
-  my $class = "LadybugNet_SQLiteTest::SQLiteTest01";
+  my $class = "Devel::Ladybug::Net::SQLiteTest";
   ok(
     testCreate(
       $class => {
-        __dbiType      => 1,
+        __useDbi       => 2,
+        __useMemcached => 5,
+        %classPrototype
+      }
+    ),
+    "Class allocate, table create"
+  );
+
+  kickClassTires($class);
+}
+
+SKIP: {
+  if ($nofs) {
+    skip( $nofs, 2 );
+  } elsif ( !$Devel::Ladybug::Runtime::Backends->{"PostgreSQL"} ) {
+    my $reason = "PostgreSQL is not supported on this system";
+
+    skip( $reason, 2 );
+  }
+
+  my $class = "Devel::Ladybug::Net::PgTest";
+  ok(
+    testCreate(
+      $class => {
+        __useDbi       => 3,
         __useMemcached => 5,
         %classPrototype
       }
@@ -112,16 +156,16 @@ SKIP: {
   if ($nofs) {
     skip( $nofs, 2 );
   } elsif ( !$Devel::Ladybug::Runtime::Backends->{"MySQL"} ) {
-    my $reason = "DBD::mysql not installed or 'op' db not ready";
+    my $reason = "DBD::mysql not supported on this system or db not ready";
 
     skip( $reason, 2 );
   }
 
-  my $class = "Devel::Ladybug::Net::MySQLTest01";
+  my $class = "Devel::Ladybug::Net::MySQLTest";
   ok(
     testCreate(
       $class => {
-        __dbiType      => 0,
+        __useDbi       => 1,
         __useMemcached => 5,
         %classPrototype
       }
@@ -178,7 +222,9 @@ sub kickClassTires {
     );
   };
 
-  $class->allIds->each(
+  ok($class->count > 0, "Object count > 0");
+
+  $class->each(
     sub {
       my $id = shift;
 
@@ -190,6 +236,15 @@ sub kickClassTires {
         sub {
           my $key  = shift;
           my $type = $asserts->{$key};
+
+          if ( exists $instancePrototype{$key} ) {
+            ok(
+              ( $obj->{$key} == $instancePrototype{$key} )
+               && ( $obj->{$key} ne "Bogus Crap" )
+               && ( $obj->{$key} ne [ "Bogus Crap" ] ),
+              "$class: $key matches orig value"
+            );
+          }
 
           isa_ok( $obj->{$key}, $type->objectClass,
             sprintf( '%s "%s"', $class->pretty($key), $obj->{$key} ) );

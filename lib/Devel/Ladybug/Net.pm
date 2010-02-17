@@ -11,7 +11,7 @@
 
 package Devel::Ladybug::Net;
 
-our $VERSION = '0.401';
+our $VERSION = '0.402';
 
 use strict;
 use warnings;
@@ -33,15 +33,13 @@ Devel::Ladybug::Net - Network datatypes for L<Devel::Ladybug>
 
 =head1 VERSION
 
-This documentation is for version B<0.401> of Devel::Ladybug::Net.
+This documentation is for version B<0.402> of Devel::Ladybug::Net.
 
 =head1 SYNOPSIS
 
-Load all network datatype packages:
-
   use Devel::Ladybug::Net;
 
-...or load them as needed:
+Devel::Ladybug::Net classes may also be loaded individually:
 
   # use Devel::Ladybug::Domain;
   # use Devel::Ladybug::EmailAddr;
@@ -54,7 +52,7 @@ Load all network datatype packages:
 This package provides several assertable network-related datatypes for
 L<Devel::Ladybug>.
 
-All classes are overloaded.
+All classes are overloaded. See individual class docs for usage.
 
 =head1 TYPES
 
